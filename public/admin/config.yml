@@ -1,14 +1,21 @@
-collections:
-  - name: "blog" # Usado en rutas, por ejemplo, /admin/collections/blog
-    label: "Blog" # Usado en la interfaz de usuario
-    folder: "src/content/blog" # La ruta a la carpeta donde se almacenan los documentos
-    create: true # Permitir a los usuarios crear nuevos documentos en esta colección
-    fields: # Los campos para cada documento, generalmente al principio
-       - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
-       - { label: "Title", name: "title", widget: "string" }
-       - { label: "Publish Date", name: "date", widget: "datetime" }
-       - { label: "Featured Image", name: "thumbnail", widget: "image" }
-       - { label: "Rating (scale of 1-5)", name: "rating", widget: "number" }
-       - { label: "Body", name: "body", widget: "markdown" }
-media_folder: "src/assets/images" # Ubicación donde se almacenarán los archivos en el repositorio
-public_folder: "src/assets/images" # El atributo src para los medios cargados
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: 'public/images/uploads' # Folder where user uploaded files should go
+public_folder: '/images/uploads'
+
+collections: # A list of collections the CMS should be able to edit
+  - name: 'post' # Used in routes, ie.: /admin/collections/:slug/edit
+    label: 'Post' # Used in the UI, ie.: "New Post"
+    folder: 'src/pages/blog' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - {label: "Layout", name: "layout", widget: "hidden", default: "$/layouts/post.astro"}
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Description', name: 'description', widget: 'text' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Tags', name: 'tags', widget: 'list' }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - { label: 'Author Twitter Handle', name: 'authorTwitter', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
